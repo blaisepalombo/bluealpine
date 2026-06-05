@@ -26,10 +26,16 @@ const slides = [
   SourcesSlide,
 ];
 
+const MOVE_LOCK_MS = 650;
+const SWIPE_THRESHOLD = 58;
+
 export default function Deck() {
   const [activeSlide, setActiveSlide] = useState(0);
   const [isMoving, setIsMoving] = useState(false);
+  const [direction, setDirection] = useState(1);
+
   const touchStartX = useRef<number | null>(null);
+  const touchStartY = useRef<number | null>(null);
   const wheelLock = useRef(false);
 
   const progress = activeSlide / (slides.length - 1);
@@ -41,12 +47,13 @@ export default function Deck() {
       const safeIndex = Math.max(0, Math.min(index, slides.length - 1));
       if (safeIndex === activeSlide) return;
 
+      setDirection(safeIndex > activeSlide ? 1 : -1);
       setActiveSlide(safeIndex);
       setIsMoving(true);
 
       window.setTimeout(() => {
         setIsMoving(false);
-      }, 620);
+      }, MOVE_LOCK_MS);
     },
     [activeSlide, isMoving]
   );
@@ -66,18 +73,16 @@ export default function Deck() {
     };
 
     const handleWheel = (event: WheelEvent) => {
-      const horizontalIntent = Math.abs(event.deltaX) > Math.abs(event.deltaY);
-      const movement = horizontalIntent ? event.deltaX : event.deltaY;
+      const isMostlyHorizontal = Math.abs(event.deltaX) > Math.abs(event.deltaY);
+      const isStrongEnough = Math.abs(event.deltaX) > 36;
 
-      if (Math.abs(movement) < 22) return;
-
-      event.preventDefault();
-
+      if (!isMostlyHorizontal || !isStrongEnough) return;
       if (wheelLock.current || isMoving) return;
 
+      event.preventDefault();
       wheelLock.current = true;
 
-      if (movement > 0) {
+      if (event.deltaX > 0) {
         goNext();
       } else {
         goPrevious();
@@ -85,7 +90,7 @@ export default function Deck() {
 
       window.setTimeout(() => {
         wheelLock.current = false;
-      }, 720);
+      }, 820);
     };
 
     window.addEventListener("keydown", handleKeyDown);
@@ -99,16 +104,29 @@ export default function Deck() {
 
   const handleTouchStart = (event: React.TouchEvent<HTMLElement>) => {
     touchStartX.current = event.touches[0].clientX;
+    touchStartY.current = event.touches[0].clientY;
   };
 
   const handleTouchEnd = (event: React.TouchEvent<HTMLElement>) => {
-    if (touchStartX.current === null || isMoving) return;
+    if (
+      touchStartX.current === null ||
+      touchStartY.current === null ||
+      isMoving
+    ) {
+      return;
+    }
 
     const touchEndX = event.changedTouches[0].clientX;
-    const difference = touchStartX.current - touchEndX;
+    const touchEndY = event.changedTouches[0].clientY;
 
-    if (Math.abs(difference) > 54) {
-      if (difference > 0) {
+    const differenceX = touchStartX.current - touchEndX;
+    const differenceY = touchStartY.current - touchEndY;
+
+    const isHorizontalSwipe = Math.abs(differenceX) > Math.abs(differenceY);
+    const isStrongEnough = Math.abs(differenceX) > SWIPE_THRESHOLD;
+
+    if (isHorizontalSwipe && isStrongEnough) {
+      if (differenceX > 0) {
         goNext();
       } else {
         goPrevious();
@@ -116,6 +134,7 @@ export default function Deck() {
     }
 
     touchStartX.current = null;
+    touchStartY.current = null;
   };
 
   return (
@@ -124,6 +143,7 @@ export default function Deck() {
       style={
         {
           "--active-slide": activeSlide,
+          "--direction": direction,
         } as React.CSSProperties
       }
       onTouchStart={handleTouchStart}

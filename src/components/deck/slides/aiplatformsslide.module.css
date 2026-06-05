@@ -1,45 +1,46 @@
 .layout {
   height: 100%;
   display: grid;
-  grid-template-columns: minmax(0, 0.75fr) minmax(460px, 1fr);
-  gap: clamp(42px, 6vw, 78px);
-  align-items: start;
+  grid-template-columns: minmax(0, 0.76fr) minmax(430px, 1fr);
+  gap: clamp(32px, 6vw, 72px);
+  align-items: center;
 }
 
 .intro h1 {
   max-width: 680px;
-  font-size: clamp(3rem, 5.4vw, 5.8rem);
+  font-size: clamp(2.8rem, 5.2vw, 5.45rem);
   line-height: 0.98;
-  letter-spacing: -0.064em;
+  letter-spacing: -0.062em;
   font-weight: 700;
 }
 
 .lead {
-  max-width: 620px;
+  max-width: 610px;
   margin-top: 24px;
   color: var(--muted);
-  font-size: 1.04rem;
+  font-size: 1.02rem;
   line-height: 1.48;
 }
 
 .grid {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: 14px;
+  gap: 16px;
 }
 
 .card {
-  min-height: 142px;
-  padding: 18px;
+  min-height: 138px;
+  padding: 20px;
   border: 1px solid var(--border);
-  border-radius: 20px;
-  background: rgba(251, 250, 247, 0.74);
+  border-radius: var(--radius-card);
+  background: rgba(251, 250, 247, 0.78);
+  box-shadow: var(--shadow-soft);
 }
 
 .card span {
   display: block;
   color: var(--green);
-  font-size: 0.72rem;
+  font-size: 0.7rem;
   font-weight: 800;
   letter-spacing: 0.1em;
   text-transform: uppercase;
@@ -48,33 +49,38 @@
 .card p {
   margin-top: 12px;
   color: var(--muted);
-  font-size: 0.92rem;
-  line-height: 1.36;
+  font-size: 0.9rem;
+  line-height: 1.38;
 }
 
 @media (max-width: 860px) {
   .layout {
-    min-height: calc(100dvh - 114px);
+    min-height: calc(100dvh - 106px);
     grid-template-columns: 1fr;
-    gap: 22px;
+    gap: 24px;
+    align-content: start;
   }
 
   .intro h1 {
-    font-size: clamp(2.35rem, 10.5vw, 4.1rem);
+    font-size: clamp(2.3rem, 10.5vw, 4.05rem);
   }
 
   .lead {
     margin-top: 18px;
-    font-size: 0.95rem;
+    font-size: 0.94rem;
   }
 
   .grid {
     grid-template-columns: 1fr;
-    gap: 10px;
+    gap: 12px;
   }
 
   .card {
     min-height: auto;
     padding: 16px;
+  }
+
+  .card p {
+    font-size: 0.86rem;
   }
 }

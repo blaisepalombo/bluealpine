@@ -1,23 +1,27 @@
 .layout {
   height: 100%;
   display: grid;
-  grid-template-rows: auto 1fr;
-  gap: 34px;
+  grid-template-rows: auto minmax(0, 1fr);
+  gap: 32px;
+}
+
+.header {
+  align-self: end;
 }
 
 .header h1 {
-  max-width: 980px;
-  font-size: clamp(3.4rem, 6.7vw, 7rem);
-  line-height: 0.94;
-  letter-spacing: -0.074em;
+  max-width: 1000px;
+  font-size: clamp(3.1rem, 6.3vw, 6.6rem);
+  line-height: 0.95;
+  letter-spacing: -0.07em;
   font-weight: 700;
 }
 
 .lead {
-  max-width: 720px;
-  margin-top: 26px;
+  max-width: 700px;
+  margin-top: 24px;
   color: var(--muted);
-  font-size: 1.08rem;
+  font-size: 1.04rem;
   line-height: 1.5;
 }
 
@@ -32,8 +36,9 @@
 .boxWide {
   padding: 22px;
   border: 1px solid var(--border);
-  border-radius: 20px;
-  background: rgba(251, 250, 247, 0.74);
+  border-radius: var(--radius-card);
+  background: rgba(251, 250, 247, 0.78);
+  box-shadow: var(--shadow-soft);
 }
 
 .boxWide {
@@ -44,7 +49,7 @@
 .boxWide span {
   display: block;
   color: var(--green);
-  font-size: 0.72rem;
+  font-size: 0.7rem;
   font-weight: 800;
   letter-spacing: 0.11em;
   text-transform: uppercase;
@@ -54,28 +59,35 @@
 .boxWide p {
   margin-top: 10px;
   color: var(--muted);
-  font-size: 0.98rem;
+  font-size: 0.94rem;
   line-height: 1.42;
 }
 
 @media (max-width: 860px) {
   .layout {
-    min-height: calc(100dvh - 114px);
-    gap: 22px;
+    min-height: calc(100dvh - 106px);
+    grid-template-rows: auto auto;
+    gap: 24px;
+    align-content: start;
+  }
+
+  .header {
+    align-self: start;
   }
 
   .header h1 {
-    font-size: clamp(2.6rem, 12vw, 4.8rem);
+    font-size: clamp(2.45rem, 11.5vw, 4.5rem);
   }
 
   .lead {
     margin-top: 18px;
-    font-size: 0.95rem;
+    font-size: 0.94rem;
   }
 
   .boxGrid {
     grid-template-columns: 1fr;
     align-self: start;
+    gap: 12px;
   }
 
   .box,
@@ -85,5 +97,10 @@
 
   .boxWide {
     grid-column: auto;
+  }
+
+  .box p,
+  .boxWide p {
+    font-size: 0.86rem;
   }
 }
