@@ -1,0 +1,76 @@
+.layout {
+  height: 100%;
+  display: grid;
+  grid-template-rows: 1fr auto;
+  gap: 34px;
+}
+
+.main h1 {
+  max-width: 940px;
+  font-size: clamp(4rem, 8vw, 8rem);
+  line-height: 0.93;
+  letter-spacing: -0.075em;
+  font-weight: 700;
+}
+
+.lead {
+  max-width: 740px;
+  margin-top: 28px;
+  color: var(--muted);
+  font-size: clamp(1.1rem, 1.65vw, 1.28rem);
+  line-height: 1.5;
+}
+
+.boxGrid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 18px;
+}
+
+.box {
+  padding: 22px;
+  border: 1px solid var(--border);
+  border-radius: 20px;
+  background: rgba(251, 250, 247, 0.74);
+}
+
+.box span {
+  display: block;
+  color: var(--green);
+  font-size: 0.72rem;
+  font-weight: 800;
+  letter-spacing: 0.11em;
+  text-transform: uppercase;
+}
+
+.box p {
+  margin-top: 10px;
+  color: var(--muted);
+  font-size: 1rem;
+  line-height: 1.45;
+}
+
+@media (max-width: 860px) {
+  .layout {
+    min-height: calc(100dvh - 114px);
+    gap: 24px;
+  }
+
+  .main h1 {
+    font-size: clamp(3rem, 15vw, 5.4rem);
+  }
+
+  .lead {
+    margin-top: 20px;
+    font-size: 1rem;
+  }
+
+  .boxGrid {
+    grid-template-columns: 1fr;
+    gap: 12px;
+  }
+
+  .box {
+    padding: 16px;
+  }
+}

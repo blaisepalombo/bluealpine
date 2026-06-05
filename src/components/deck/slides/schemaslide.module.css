@@ -1,0 +1,9 @@
+.layout { height:100%; display:grid; grid-template-columns:minmax(0,.9fr) minmax(360px,.75fr); gap:clamp(42px,7vw,88px); align-items:start; }
+.layout h1{margin:0; font-size:clamp(3.1rem,5.7vw,6rem); line-height:.97; letter-spacing:-.066em;}
+.lead{max-width:670px; margin:24px 0 0; color:var(--muted); font-size:1.05rem; line-height:1.5;}
+.stack{display:grid; gap:24px;}
+.code{padding-top:18px; border-top:1px solid var(--line);}
+.code span{color:var(--green); font-size:.72rem; font-weight:800; letter-spacing:.1em; text-transform:uppercase;}
+.code code{display:block; margin-top:14px; color:var(--text); font-family:Helvetica, Arial, sans-serif; font-size:1.1rem; line-height:1.45;}
+.note{margin:0; padding-top:18px; border-top:1px solid var(--line); color:var(--muted); font-size:.98rem; line-height:1.45;}
+@media(max-width:860px){.layout{min-height:calc(100dvh - 122px); grid-template-columns:1fr; gap:24px;} .layout h1{font-size:clamp(2.4rem,10.5vw,4.3rem);} .lead{font-size:.94rem;} .code code{font-size:.94rem;} .note{font-size:.84rem;}}

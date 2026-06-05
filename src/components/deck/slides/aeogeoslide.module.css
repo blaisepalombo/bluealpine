@@ -1,0 +1,72 @@
+.layout {
+  height: 100%;
+  display: grid;
+  grid-template-columns: minmax(0, 0.95fr) minmax(360px, 0.78fr);
+  gap: clamp(46px, 7vw, 96px);
+  align-items: start;
+}
+
+.copy h1 {
+  max-width: 800px;
+  font-size: clamp(3.4rem, 6.3vw, 6.6rem);
+  line-height: 0.96;
+  letter-spacing: -0.07em;
+  font-weight: 700;
+}
+
+.lead {
+  max-width: 680px;
+  margin-top: 26px;
+  color: var(--muted);
+  font-size: 1.08rem;
+  line-height: 1.5;
+}
+
+.compare {
+  display: grid;
+  gap: 14px;
+}
+
+.compare div {
+  padding: 22px;
+  border: 1px solid var(--border);
+  border-radius: 20px;
+  background: rgba(251, 250, 247, 0.74);
+}
+
+.compare span {
+  display: block;
+  color: var(--green);
+  font-size: 0.72rem;
+  font-weight: 800;
+  letter-spacing: 0.11em;
+  text-transform: uppercase;
+}
+
+.compare p {
+  margin-top: 10px;
+  color: var(--muted);
+  font-size: 0.98rem;
+  line-height: 1.42;
+}
+
+@media (max-width: 860px) {
+  .layout {
+    min-height: calc(100dvh - 114px);
+    grid-template-columns: 1fr;
+    gap: 22px;
+  }
+
+  .copy h1 {
+    font-size: clamp(2.55rem, 11vw, 4.5rem);
+  }
+
+  .lead {
+    margin-top: 18px;
+    font-size: 0.95rem;
+  }
+
+  .compare div {
+    padding: 16px;
+  }
+}
